@@ -1,56 +1,85 @@
+const {listContacts, getContactById, addContact,removeContact, updateContact}=require('../../models/contacts.js')
 const express = require('express')
-const contacts = require('../../models/contacts.json')
-const {nanoid} = require('nanoid')
+
+
 
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
-  res.json({
+  const result = await listContacts();
+  res.status(200).json({
     status: 'success',
     code: 200,
-    data:{result:contacts}
+    data:{result}
     
   })
 })
 
 router.get('/:contactId', async (req, res, next) => {
   const { contactId } = req.params;
-  const result = contacts.find(contact => contact.id === contactId)
-  if (!result) {
-    res.status(404).json({
-      status: 'error',
-      code: 404,
-      message:`Contact with id=${contactId} not found`
-    })
-  }
-  res.json({
+  const result = await getContactById(contactId)
+ 
+  if (result) {
+     res.status(200).json({
     status: 'success',
     code: 200,
     data: {
       result
     }
     })
+  }
+  res.status(404).json({
+    status: 'error',
+    code: 404,
+    message:`Contact with id=${contactId} not found`
+  })
+ 
 })
 
 router.post('/', async (req, res, next) => {
-  const newContact = { ...req.body, id: nanoid(5) }
-  contacts.push(newContact)
+
+  const result = await addContact(req.body)
+
   res.status(201).json({
     status: 'success',
     code: 201,
     data: {
-      result:newContact
+      result
     }
 })
   
 })
 
 router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const { contactId } = req.params;
+  const result = await removeContact(contactId);
+  if (result) {
+    res.status(200).json({
+    status:'success',
+    code: 200,
+    message: 'contact deleted',
+    data:{result}
+  })
+  }
+  res.status(404).json({
+    status:'error',
+    code:404,
+    message: 'not found'
+  })
+  
 })
 
 router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const { contactId } = req.params;
+  const result = await updateContact(contactId, req.body)
+  
+    res.status(200).json({
+      message: 'contact successfully updated',
+      code: 200,
+      data:{result}
+    })
+  
+  
 })
 
 module.exports = router
