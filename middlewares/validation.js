@@ -28,5 +28,20 @@ module.exports = {
     });
   }
         next();
-    }
+  },
+  statusValidation: (req, res, next) => {
+    const { favorite } = req.body;
+    const schema = Joi.object({
+      favorite: Joi.boolean().required()
+    });
+    const validationResult = schema.validate({ favorite });
+     if (validationResult.error) {
+    return res.status(400).json({
+      status: "error",
+      code: 400,
+      message: validationResult.error.message,
+    });
+  }
+        next();
+  }
 };
