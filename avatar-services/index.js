@@ -1,7 +1,7 @@
-const service = require('./service')
-const localStorage = require('./localStorage')
+// const service = require('./service')
+// const localStorage = require('./localStorage')
 
-module.exports = {
-    service,
-    localStorage
-}
+// module.exports = {
+//     service,
+//     localStorage
+// }
