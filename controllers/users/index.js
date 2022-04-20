@@ -1,11 +1,10 @@
 const getCurrent = require('./getCurrent');
 const subscriptionUpdate = require('./subscriptionUpdate');
-const avatar = require('./avatar');
-const avatarUpdate = require('./avatarUpdate');
+const avatarController = require('./avatarController')
 
 module.exports = {
     getCurrent,
     subscriptionUpdate,
-    avatar,
-    avatarUpdate
+  avatarController
+
 };

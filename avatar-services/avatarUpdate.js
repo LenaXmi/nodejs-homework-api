@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User } = require("../models");
 
 const avatarUpdate = async (id, avatarURL) => { 
      const user = await User.findById(id);
@@ -10,12 +10,5 @@ const avatarUpdate = async (id, avatarURL) => {
      return user;
 }
 
-// const avatarUpdate = async (id,avatar) => { 
-//     console.log(avatar)
 
-//      await User.findByIdAndUpdate(id, { avatar }, { new: true });
-
-// }
-
-
-module.exports = avatarUpdate;
+module.exports = {avatarUpdate};

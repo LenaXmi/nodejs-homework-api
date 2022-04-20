@@ -1,7 +1,7 @@
-const AvatarService = require('../../avatar-services/service');
+const AvatarService = require('../../avatar-services/avatarService');
 const LocalStorage = require('../../avatar-services/localStorage');
 
-const avatar = async (req, res, next) => {
+const avatarController = async (req, res, next) => {
     const avatarService = new AvatarService(LocalStorage, req.file, req.user);
 
   const  avatarURL = await avatarService.update();
@@ -15,4 +15,4 @@ const avatar = async (req, res, next) => {
     });
 }
 
-module.exports = avatar;
+module.exports = avatarController;

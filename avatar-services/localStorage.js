@@ -1,8 +1,7 @@
 const path = require("path");
 const fs = require("fs/promises");
+const {avatarUpdate}=require('./avatarUpdate')
 
-const {users} = require('../controllers')
-console.log(users)
 
 
 class LocalStorage {
@@ -21,7 +20,7 @@ class LocalStorage {
     );
     const avatarURL = path.normalize(path.join(this.static, this.file.filename));
 
-    await users.avatarUpdate(this.user.id, avatarURL);
+    await avatarUpdate(this.user.id, avatarURL);
     return avatarURL;
   }
 }
