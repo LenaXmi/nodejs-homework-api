@@ -81,5 +81,22 @@ module.exports = {
     
   }
     next();
+  },
+  verifyValidation: (req, res, next) => {
+    const { email } = req.body;
+    const schema = Joi.object({
+      email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+        .required(),
+    });
+    const validationResult = schema.validate({ email });
+    if (validationResult.error) {
+      return res.status(400).json({
+        status: "error",
+        code: 400,
+        message: validationResult.error.message,
+      });
+    }
+    next()
   }
-};
+}
