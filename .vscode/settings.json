@@ -1,9 +1,9 @@
 {
   "cSpell.ignoreWords": [
+    "APIKEY",
+    "SENDGRID",
     "middlewares",
     "originalname"
   ],
-  "cSpell.words": [
-    "autocrop"
-  ]
+  "cSpell.words": ["autocrop"]
 }
